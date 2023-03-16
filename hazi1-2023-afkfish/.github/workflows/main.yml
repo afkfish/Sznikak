@@ -1,0 +1,66 @@
+# Worklow for build and check
+
+name: Build&Check
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+  
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Checkout for Neptun checker. Currently, the Neptune checker supports only having the
+      # code checked out in the root folder. 
+      - uses: actions/checkout@v3
+      
+      - name: Neptun code check
+        uses: bmeaut/ahk-action-neptuncheck@v1
+
+      - name: Download tests
+        uses: actions/checkout@v3
+        with: 
+          repository: 'bmeviauab00/ModAndCode-hf-test-binaries'
+      
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Checkout for tests. Currently, the AUT.SzT.Checker.ModAndCode.dll unit test supports only having the
+      # code checked out in the "megoldas" subfolder
+      - uses: actions/checkout@v3
+        with:
+          path: 'megoldas'
+                
+      - name: Build and publish with dotnet - Feladat1
+        run: dotnet publish megoldas/Feladat1/MusicApp/MusicApp.csproj
+
+      - name: Build and publish with dotnet - Feladat2
+        run: dotnet publish megoldas/Feladat2/Shapes/Shapes.csproj
+  
+      - name: Run tests
+        run: dotnet test AUT.SzT.Checker.ModAndCode.dll
+
+      # - name: Upload executable artifact - Feladat 1
+      #   uses: actions/upload-artifact@v1.0.0
+      #   with:
+      #     name: Executable
+      #     path: megoldas/Feladat1/MusicApp/bin/Debug/netcoreapp2.1/publish
+                    
+      # - name: Upload executable artifact - Feladat 2
+      #   uses: actions/upload-artifact@v1.0.0
+      #   with:
+      #     name: Executable
+      #     path: megoldas/Feladat2/Shapes/bin/Debug/netcoreapp2.1/publish
