@@ -1,0 +1,74 @@
+# This is a basic workflow to help you get started with Actions
+# temp for action trigger
+
+name: Build&Check-SelfHosted
+
+# Controls when the action will run.
+on: workflow_dispatch
+    
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build-and-check:
+    # The type of runner that the job will run on
+    runs-on: self-hosted
+    timeout-minutes: 10
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+    - name: Kill testable app if it's still running (e.g. from previous session). Do early as running up may event prevent checkout.
+      shell: powershell
+      run: Stop-Process -Name "WinFormExpl" -ErrorAction SilentlyContinue
+
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v3
+   
+    - name: Neptun code check
+      uses: bmeaut/ahk-action-neptuncheck@v1
+      
+    - name: Build and publish with dotnet
+      run: dotnet publish Feladatok/WinFormExpl/WinFormExpl.csproj -o Feladatok/WinFormExpl/bin/publish
+  
+    - name: Download UI tests
+      uses: actions/checkout@v3
+      with: 
+        repository: 'bmeviauab00/winforms-hf-uitest-binaries'
+        path: 'ui-tests'
+                
+    - name: Kill WinAppDriver (just for extra safety it got stuck)
+      shell: powershell
+      run: Stop-Process -Name "WinAppDriver"  -ErrorAction SilentlyContinue
+
+    - name: Start WinAppDriver
+      run: start /d "C:/Program Files (x86)/Windows Application Driver" WinAppDriver.exe
+      shell: cmd
+
+    - name: Run UI tests - Feladat1 (Menü)
+      run: dotnet test ui-tests\WinFormExpl-Test.dll --filter ClassName~Feladat1 -s ui-tests\test.runsettings
+    
+    - name: Run UI tests - Feladat2 (Dialógusablak)
+      run: dotnet test ui-tests\WinFormExpl-Test.dll --filter ClassName~Feladat2 -s ui-tests\test.runsettings
+      
+    - name: Run UI tests - Feladat3 (Fájlkezelő)
+      run: dotnet test ui-tests\WinFormExpl-Test.dll --filter ClassName~Feladat3 -s ui-tests\test.runsettings
+      
+    - name: Run UI tests - Feladat4 (Rajzolás)
+      run: dotnet test ui-tests\WinFormExpl-Test.dll --filter ClassName~Feladat4 -s ui-tests\test.runsettings
+      
+    - name: Run UI tests - IMSc opcionális
+    # Unfortunatelly this does not work since moved app to .NET 6, so have to run IMSc tests one by one
+    #      run: dotnet test ui-tests\WinFormExpl-Test.dll --filter ClassName~Feladat5 -s ui-tests\test.runsettings      
+      run: |
+        dotnet test ui-tests\WinFormExpl-Test.dll --filter Name~TestDirsDisplayed -s ui-tests\test.runsettings
+        dotnet test ui-tests\WinFormExpl-Test.dll --filter Name~TestDirsCanBeOpen -s ui-tests\test.runsettings
+        dotnet test ui-tests\WinFormExpl-Test.dll --filter Name~TestParentFolderShown -s ui-tests\test.runsettings
+        dotnet test ui-tests\WinFormExpl-Test.dll --filter Name~TestParentFolderDoupleClickNavigatesToParent -s ui-tests\test.runsettings
+        dotnet test ui-tests\WinFormExpl-Test.dll --filter Name~TestParentFolderIsNotDisplayedInRoot -s ui-tests\test.runsettings    
+
+    - name: Upload executable artifact
+      uses: actions/upload-artifact@v1.0.0
+      with: 
+        name: Executable
+        path: Feladatok/WinFormExpl/bin/publish
+      
