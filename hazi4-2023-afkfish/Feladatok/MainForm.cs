@@ -23,7 +23,7 @@ namespace MultiThreadedApp
             {
                 // elmennek a startbol a step1-re
                 var bike = (Button)param;
-                while (bike.Left < pStep.Left)
+                while (bike.Left < pStart.Left)
                 {
                     if (stopBikes)
                     {
@@ -87,6 +87,8 @@ namespace MultiThreadedApp
             StartBike(bBike1);
             StartBike(bBike2);
             StartBike(bBike3);
+
+            bStart.Enabled = false;
         }
 
         private void StartBike(Button bBike)
@@ -146,6 +148,8 @@ namespace MultiThreadedApp
             mre.Reset();
 
             bike.Left = start;
+
+            StartBike(bike);
         }
 
         private void bStop_Click(object sender, EventArgs e)

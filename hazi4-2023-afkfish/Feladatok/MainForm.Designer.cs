@@ -33,7 +33,7 @@
             bStart = new Button();
             bBike2 = new Button();
             bBike3 = new Button();
-            pStep = new Panel();
+            pStart = new Panel();
             bStep1 = new Button();
             pDepo = new Panel();
             bStep2 = new Button();
@@ -44,17 +44,19 @@
             // pTarget
             // 
             pTarget.BackColor = Color.LightSteelBlue;
-            pTarget.Location = new Point(1023, 32);
+            pTarget.Location = new Point(1330, 41);
+            pTarget.Margin = new Padding(4, 4, 4, 4);
             pTarget.Name = "pTarget";
-            pTarget.Size = new Size(176, 658);
+            pTarget.Size = new Size(229, 842);
             pTarget.TabIndex = 0;
             // 
             // bBike1
             // 
             bBike1.Font = new Font("Webdings", 32F, FontStyle.Regular, GraphicsUnit.Point);
-            bBike1.Location = new Point(123, 32);
+            bBike1.Location = new Point(160, 41);
+            bBike1.Margin = new Padding(4, 4, 4, 4);
             bBike1.Name = "bBike1";
-            bBike1.Size = new Size(165, 109);
+            bBike1.Size = new Size(214, 140);
             bBike1.TabIndex = 0;
             bBike1.Text = "b";
             bBike1.UseVisualStyleBackColor = true;
@@ -62,9 +64,10 @@
             // 
             // bStart
             // 
-            bStart.Location = new Point(123, 759);
+            bStart.Location = new Point(160, 972);
+            bStart.Margin = new Padding(4, 4, 4, 4);
             bStart.Name = "bStart";
-            bStart.Size = new Size(165, 88);
+            bStart.Size = new Size(214, 113);
             bStart.TabIndex = 1;
             bStart.Text = "Start";
             bStart.UseVisualStyleBackColor = true;
@@ -73,9 +76,10 @@
             // bBike2
             // 
             bBike2.Font = new Font("Webdings", 32F, FontStyle.Regular, GraphicsUnit.Point);
-            bBike2.Location = new Point(123, 147);
+            bBike2.Location = new Point(160, 188);
+            bBike2.Margin = new Padding(4, 4, 4, 4);
             bBike2.Name = "bBike2";
-            bBike2.Size = new Size(165, 109);
+            bBike2.Size = new Size(214, 140);
             bBike2.TabIndex = 2;
             bBike2.Text = "b";
             bBike2.UseVisualStyleBackColor = true;
@@ -84,27 +88,30 @@
             // bBike3
             // 
             bBike3.Font = new Font("Webdings", 32F, FontStyle.Regular, GraphicsUnit.Point);
-            bBike3.Location = new Point(123, 262);
+            bBike3.Location = new Point(160, 335);
+            bBike3.Margin = new Padding(4, 4, 4, 4);
             bBike3.Name = "bBike3";
-            bBike3.Size = new Size(165, 109);
+            bBike3.Size = new Size(214, 140);
             bBike3.TabIndex = 3;
             bBike3.Text = "b";
             bBike3.UseVisualStyleBackColor = true;
             bBike3.Click += bBike1_Click;
             // 
-            // pStep
+            // pStart
             // 
-            pStep.BackColor = Color.SteelBlue;
-            pStep.Location = new Point(403, 32);
-            pStep.Name = "pStep";
-            pStep.Size = new Size(176, 658);
-            pStep.TabIndex = 4;
+            pStart.BackColor = Color.SteelBlue;
+            pStart.Location = new Point(524, 41);
+            pStart.Margin = new Padding(4, 4, 4, 4);
+            pStart.Name = "pStart";
+            pStart.Size = new Size(229, 842);
+            pStart.TabIndex = 4;
             // 
             // bStep1
             // 
-            bStep1.Location = new Point(403, 759);
+            bStep1.Location = new Point(524, 972);
+            bStep1.Margin = new Padding(4, 4, 4, 4);
             bStep1.Name = "bStep1";
-            bStep1.Size = new Size(176, 88);
+            bStep1.Size = new Size(229, 113);
             bStep1.TabIndex = 5;
             bStep1.Text = "Step1";
             bStep1.UseVisualStyleBackColor = true;
@@ -113,16 +120,18 @@
             // pDepo
             // 
             pDepo.BackColor = Color.LightSkyBlue;
-            pDepo.Location = new Point(715, 32);
+            pDepo.Location = new Point(929, 41);
+            pDepo.Margin = new Padding(4, 4, 4, 4);
             pDepo.Name = "pDepo";
-            pDepo.Size = new Size(176, 658);
+            pDepo.Size = new Size(229, 842);
             pDepo.TabIndex = 6;
             // 
             // bStep2
             // 
-            bStep2.Location = new Point(715, 759);
+            bStep2.Location = new Point(929, 972);
+            bStep2.Margin = new Padding(4, 4, 4, 4);
             bStep2.Name = "bStep2";
-            bStep2.Size = new Size(176, 88);
+            bStep2.Size = new Size(229, 113);
             bStep2.TabIndex = 7;
             bStep2.Text = "Step2";
             bStep2.UseVisualStyleBackColor = true;
@@ -130,9 +139,10 @@
             // 
             // bStepsCount
             // 
-            bStepsCount.Location = new Point(1023, 759);
+            bStepsCount.Location = new Point(1330, 972);
+            bStepsCount.Margin = new Padding(4, 4, 4, 4);
             bStepsCount.Name = "bStepsCount";
-            bStepsCount.Size = new Size(176, 88);
+            bStepsCount.Size = new Size(229, 113);
             bStepsCount.TabIndex = 8;
             bStepsCount.Text = "steps";
             bStepsCount.UseVisualStyleBackColor = true;
@@ -140,9 +150,10 @@
             // 
             // bStop
             // 
-            bStop.Location = new Point(123, 867);
+            bStop.Location = new Point(160, 1110);
+            bStop.Margin = new Padding(4, 4, 4, 4);
             bStop.Name = "bStop";
-            bStop.Size = new Size(165, 88);
+            bStop.Size = new Size(214, 113);
             bStop.TabIndex = 9;
             bStop.Text = "Stop";
             bStop.UseVisualStyleBackColor = true;
@@ -150,9 +161,9 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1380, 967);
+            ClientSize = new Size(1794, 1238);
             Controls.Add(bStop);
             Controls.Add(bStepsCount);
             Controls.Add(bStep2);
@@ -162,8 +173,9 @@
             Controls.Add(bStart);
             Controls.Add(bBike1);
             Controls.Add(pTarget);
-            Controls.Add(pStep);
+            Controls.Add(pStart);
             Controls.Add(pDepo);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "MainForm";
             Text = "Tour de France - JOYAXJ";
             ResumeLayout(false);
@@ -176,7 +188,7 @@
         private Button bStart;
         private Button bBike2;
         private Button bBike3;
-        private Panel pStep;
+        private Panel pStart;
         private Button bStep1;
         private Panel pDepo;
         private Button bStep2;
